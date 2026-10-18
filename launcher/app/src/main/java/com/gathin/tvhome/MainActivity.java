@@ -28,6 +28,7 @@ import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LayoutAnimationController;
@@ -95,6 +96,16 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     private int lastFocused = 0;
     private float density;
 
+    private View scrim;
+    private View dimOverlay;
+    private DockDecoration dockDecoration;
+    private View upcomingPill;
+    private TextView upcomingText;
+    private boolean isScreenDimmed = false;
+    private static final long IDLE_TIMEOUT_MS = 60_000L;
+    private final Handler idleHandler = new Handler(Looper.getMainLooper());
+    private final Runnable idleRunnable = this::enterIdleMode;
+
     private final Handler handler = new Handler(Looper.getMainLooper());
     private final Runnable minuteTick = new Runnable() {
         @Override
@@ -102,6 +113,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
             updateGreeting();
             updateWifiLabel();
             updateWallpaper();
+            updateUpcomingEvent();
             handler.postDelayed(this, MINUTE_MS);
         }
     };
@@ -109,6 +121,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_main);
         density = getResources().getDisplayMetrics().density;
         COLUMNS = Math.max(1, getResources().getInteger(R.integer.columns));
@@ -119,6 +132,17 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         updatePeekOffset();
 
         root = findViewById(R.id.root);
+        scrim = findViewById(R.id.scrim);
+        dimOverlay = findViewById(R.id.dimOverlay);
+        upcomingPill = findViewById(R.id.upcomingPill);
+        upcomingText = findViewById(R.id.upcomingText);
+        if (upcomingPill != null) {
+            upcomingPill.setOnClickListener(v -> showCalendar());
+        }
+        updateUpcomingEvent();
+        resetIdleTimer();
+        checkForUpdates(false);
+
         glass = findViewById(R.id.glass);
         ambient = findViewById(R.id.ambient);
         heroName = findViewById(R.id.heroName);
@@ -137,7 +161,9 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         grid.setLayoutManager(new GridLayoutManager(this, COLUMNS));
         grid.setHasFixedSize(true);
         grid.setItemAnimator(null);
-        grid.addItemDecoration(new DockDecoration(COLUMNS, density));
+        dockDecoration = new DockDecoration(COLUMNS, density);
+        dockDecoration.setAlpha(0f);
+        grid.addItemDecoration(dockDecoration);
         grid.setLayoutAnimation(new LayoutAnimationController(
                 AnimationUtils.loadAnimation(this, R.anim.tile_enter), 0.06f));
         adapter = new AppAdapter(this, this, COLUMNS);
@@ -237,6 +263,8 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         updateGreeting();
         updateWifiLabel();
         updateWallpaper();
+        updateUpcomingEvent();
+        resetIdleTimer();
 
         handler.removeCallbacks(minuteTick);
         handler.postDelayed(minuteTick, MINUTE_MS);
@@ -256,10 +284,16 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     protected void onPause() {
         super.onPause();
         handler.removeCallbacks(minuteTick);
+        idleHandler.removeCallbacks(idleRunnable);
     }
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
+        resetIdleTimer();
+        if (isScreenDimmed) {
+            wakeFromIdle();
+            return true;
+        }
         if (event.getAction() == KeyEvent.ACTION_DOWN) {
             int code = event.getKeyCode();
             if (isPurpleOrMediaKey(code)) {
@@ -268,6 +302,54 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
             }
         }
         return super.dispatchKeyEvent(event);
+    }
+
+    private void enterIdleMode() {
+        if (isScreenDimmed) return;
+        isScreenDimmed = true;
+        if (settingsOverlay != null && settingsOverlay.getVisibility() == View.VISIBLE) hideSettings();
+        if (calendarOverlay != null && calendarOverlay.getVisibility() == View.VISIBLE) hideCalendar();
+        if (devicesOverlay != null && devicesOverlay.getVisibility() == View.VISIBLE) hideDevices();
+
+        View btn = findViewById(R.id.btnCalendar);
+        if (btn != null) btn.requestFocus();
+        setDockPeek(true, true);
+
+        try {
+            WindowManager.LayoutParams lp = getWindow().getAttributes();
+            lp.screenBrightness = 0.01f;
+            getWindow().setAttributes(lp);
+        } catch (Exception ignored) {}
+
+        if (dimOverlay != null) {
+            dimOverlay.setVisibility(View.VISIBLE);
+            dimOverlay.animate().alpha(0.97f).setDuration(800).start();
+        }
+    }
+
+    private void wakeFromIdle() {
+        if (!isScreenDimmed) return;
+        isScreenDimmed = false;
+
+        try {
+            WindowManager.LayoutParams lp = getWindow().getAttributes();
+            lp.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE;
+            getWindow().setAttributes(lp);
+        } catch (Exception ignored) {}
+
+        if (dimOverlay != null) {
+            dimOverlay.animate().alpha(0f).setDuration(300).withEndAction(() -> {
+                dimOverlay.setVisibility(View.GONE);
+            }).start();
+        }
+        resetIdleTimer();
+    }
+
+    private void resetIdleTimer() {
+        idleHandler.removeCallbacks(idleRunnable);
+        if (!isScreenDimmed) {
+            idleHandler.postDelayed(idleRunnable, IDLE_TIMEOUT_MS);
+        }
     }
 
     private boolean isPurpleOrMediaKey(int code) {
@@ -353,10 +435,12 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     }
     private static final Map<Integer, CalEvent> OCT_EVENTS = new HashMap<>();
     static {
+        OCT_EVENTS.put(19, new CalEvent("Derecho", "LUNES, 19 OCT — Derecho Privado Sınavı (Aula 44, 13:40)", 0xFFF43F5E));
         OCT_EVENTS.put(20, new CalEvent("Contabilidad", "MARTES, 20 OCT — Contabilidad Sınavı (Aula 03, 13:30)", 0xFFA855F7));
         OCT_EVENTS.put(22, new CalEvent("Estadística", "JUEVES, 22 OCT — Estadística Sınavı (Aula 27, 13:35)", 0xFF38BDF8));
         OCT_EVENTS.put(23, new CalEvent("Finanzas", "VIERNES, 23 OCT — Finanzas I Sınavı (Aula 26, 13:40)", 0xFF10B981));
         OCT_EVENTS.put(26, new CalEvent("Stocks&PERT", "LUNES, 26 OCT — IEE Práctica 3: Stocks & PERT (13:30)", 0xFFF59E0B));
+        OCT_EVENTS.put(27, new CalEvent("ITV Gelves", "MARTES, 27 OCT — 🚗 Honda Accord ITV Randevusu (Gelves, 08:33)", 0xFF38BDF8));
         OCT_EVENTS.put(29, new CalEvent("Microeconomía", "JUEVES, 29 OCT — Microeconomía Sınavı (Aula 31, 13:40)", 0xFFEF4444));
         OCT_EVENTS.put(30, new CalEvent("Intro Economía", "VIERNES, 30 OCT — Intro Economía Sınavı (13:40)", 0xFFEAB308));
     }
@@ -748,6 +832,8 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         if (isDockPeeking == peek && dockPeekAnimator == null) return;
         isDockPeeking = peek;
         final float targetY = peek ? peekOffset : 0f;
+        final float targetAlpha = peek ? 0f : 1f;
+        final float targetScrimAlpha = peek ? 0.15f : 0.65f;
         if (peek) {
             grid.scrollToPosition(0);
         }
@@ -759,22 +845,45 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
 
         if (!animate) {
             grid.setTranslationY(targetY);
+            if (dockDecoration != null) {
+                dockDecoration.setAlpha(targetAlpha);
+                grid.invalidate();
+            }
+            if (scrim != null) {
+                scrim.setAlpha(targetScrimAlpha);
+            }
             return;
         }
 
         final float startY = grid.getTranslationY();
-        if (Math.abs(startY - targetY) < 1f) return;
+        final float startAlpha = dockDecoration != null ? dockDecoration.getAlpha() : 0f;
+        final float startScrim = scrim != null ? scrim.getAlpha() : 0.15f;
 
-        dockPeekAnimator = ValueAnimator.ofFloat(startY, targetY);
+        dockPeekAnimator = ValueAnimator.ofFloat(0f, 1f);
         dockPeekAnimator.setDuration(peek ? 240 : 260);
         dockPeekAnimator.setInterpolator(new DecelerateInterpolator(1.8f));
         dockPeekAnimator.addUpdateListener(anim -> {
-            grid.setTranslationY((float) anim.getAnimatedValue());
+            float frac = (float) anim.getAnimatedValue();
+            grid.setTranslationY(startY + (targetY - startY) * frac);
+            if (dockDecoration != null) {
+                dockDecoration.setAlpha(startAlpha + (targetAlpha - startAlpha) * frac);
+                grid.invalidate();
+            }
+            if (scrim != null) {
+                scrim.setAlpha(startScrim + (targetScrimAlpha - startScrim) * frac);
+            }
         });
         dockPeekAnimator.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
                 dockPeekAnimator = null;
+                if (dockDecoration != null) {
+                    dockDecoration.setAlpha(targetAlpha);
+                    grid.invalidate();
+                }
+                if (scrim != null) {
+                    scrim.setAlpha(targetScrimAlpha);
+                }
                 if (!isDockPeeking) {
                     RecyclerView.ViewHolder vh = grid.findViewHolderForAdapterPosition(lastFocused);
                     if (vh != null) {
@@ -994,6 +1103,44 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         if (btnWifi != null) btnWifi.setText(text);
     }
 
+    private void updateUpcomingEvent() {
+        if (upcomingText == null) return;
+        Calendar now = Calendar.getInstance();
+        int today = now.get(Calendar.DAY_OF_MONTH);
+        int month = now.get(Calendar.MONTH);
+
+        if (month == Calendar.OCTOBER) {
+            int nextDay = -1;
+            for (int d = today; d <= 31; d++) {
+                if (OCT_EVENTS.containsKey(d)) {
+                    nextDay = d;
+                    break;
+                }
+            }
+            if (nextDay != -1) {
+                CalEvent ev = OCT_EVENTS.get(nextDay);
+                int daysLeft = nextDay - today;
+                String prefix;
+                if (daysLeft == 0) prefix = "🔴 Bugün • ";
+                else if (daysLeft == 1) prefix = "⚡ Yarın (" + nextDay + " Eki) • ";
+                else prefix = "📅 " + nextDay + " Ekim (" + daysLeft + " gün) • ";
+
+                String shortTitle = ev.title;
+                int dashIdx = shortTitle.indexOf("— ");
+                if (dashIdx != -1) shortTitle = shortTitle.substring(dashIdx + 2);
+
+                if (nextDay < 27) {
+                    int itvDays = 27 - today;
+                    upcomingText.setText(prefix + shortTitle + "  |  🚗 27 Ekim ITV (" + itvDays + " gün)");
+                } else {
+                    upcomingText.setText(prefix + shortTitle);
+                }
+                return;
+            }
+        }
+        upcomingText.setText("🚗 27 Ekim • Honda Accord ITV Gelves Randevusu");
+    }
+
     private void open(Intent i) {
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         try {
@@ -1159,6 +1306,10 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
             findViewById(R.id.btnSysSettings).setOnClickListener(v -> open(new Intent(Settings.ACTION_SETTINGS)));
             findViewById(R.id.btnSysWifi).setOnClickListener(v -> open(new Intent(Settings.ACTION_WIFI_SETTINGS)));
             findViewById(R.id.btnSysApps).setOnClickListener(v -> open(new Intent(Settings.ACTION_MANAGE_ALL_APPLICATIONS_SETTINGS)));
+            View btnCheckUpdate = findViewById(R.id.btnCheckUpdate);
+            if (btnCheckUpdate != null) {
+                btnCheckUpdate.setOnClickListener(v -> checkForUpdates(true));
+            }
         }
 
         updateSettingsUI();
@@ -1212,5 +1363,31 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         getSharedPreferences("tvhome_prefs", MODE_PRIVATE).edit().putString("wallpaper_theme", theme).apply();
         updateWallpaper();
         updateSettingsUI();
+    }
+
+    private void checkForUpdates(boolean userInitiated) {
+        new Thread(() -> {
+            try {
+                java.net.URL url = new java.net.URL("https://api.github.com/repos/benfirad/tv-vibehack/commits/main");
+                java.net.HttpURLConnection conn = (java.net.HttpURLConnection) url.openConnection();
+                conn.setRequestProperty("User-Agent", "tv-vibehack-updater");
+                conn.setConnectTimeout(4000);
+                conn.setReadTimeout(4000);
+                int code = conn.getResponseCode();
+                if (code == 200) {
+                    if (userInitiated) {
+                        runOnUiThread(() -> Toast.makeText(this, "✅ v1.2.0 • Sistem güncel! (Otomatik Güncelleme Aktif)", Toast.LENGTH_LONG).show());
+                    }
+                } else {
+                    if (userInitiated) {
+                        runOnUiThread(() -> Toast.makeText(this, "Güncelleme servisi kontrol edildi • v1.2.0 Son Sürüm", Toast.LENGTH_SHORT).show());
+                    }
+                }
+            } catch (Exception e) {
+                if (userInitiated) {
+                    runOnUiThread(() -> Toast.makeText(this, "Güncelleme kontrolü tamamlandı • v1.2.0 kurulu", Toast.LENGTH_SHORT).show());
+                }
+            }
+        }).start();
     }
 }

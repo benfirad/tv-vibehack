@@ -441,6 +441,22 @@
                             android:textSize="13sp"
                             android:nextFocusUp="@+id/btnWallAuto" />
                     </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/btnCheckUpdate"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/setting_option_bg"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:fontFamily="@font/outfit"
+                        android:fontVariationSettings="'wght' 500"
+                        android:text="🔄 Otomatik Güncellemeleri Denetle (GitHub / DAAK)"
+                        android:textColor="@drawable/setting_option_text"
+                        android:textSize="13sp"
+                        android:nextFocusUp="@+id/btnSysSettings" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

@@ -127,28 +127,198 @@
             </LinearLayout>
         </RelativeLayout>
 
-        <!-- Days of Week Header -->
+        <!-- Two-column Layout: Month Grid on left, RM-OS Agenda on right -->
         <LinearLayout
-            android:id="@+id/calWeekDays"
-            android:layout_width="match_parent"
-            android:layout_height="28dp"
-            android:orientation="horizontal">
-
-            <TextView style="@style/CalDayHeader" android:text="SUN" />
-            <TextView style="@style/CalDayHeader" android:text="MON" />
-            <TextView style="@style/CalDayHeader" android:text="TUE" />
-            <TextView style="@style/CalDayHeader" android:text="WED" />
-            <TextView style="@style/CalDayHeader" android:text="THU" />
-            <TextView style="@style/CalDayHeader" android:text="FRI" />
-            <TextView style="@style/CalDayHeader" android:text="SAT" />
-        </LinearLayout>
-
-        <!-- Calendar Month Grid Container -->
-        <TableLayout
-            android:id="@+id/calGridTable"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:stretchColumns="0,1,2,3,4,5,6" />
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="7"
+                android:orientation="vertical">
+
+                <!-- Days of Week Header -->
+                <LinearLayout
+                    android:id="@+id/calWeekDays"
+                    android:layout_width="match_parent"
+                    android:layout_height="28dp"
+                    android:orientation="horizontal">
+
+                    <TextView style="@style/CalDayHeader" android:text="SUN" />
+                    <TextView style="@style/CalDayHeader" android:text="MON" />
+                    <TextView style="@style/CalDayHeader" android:text="TUE" />
+                    <TextView style="@style/CalDayHeader" android:text="WED" />
+                    <TextView style="@style/CalDayHeader" android:text="THU" />
+                    <TextView style="@style/CalDayHeader" android:text="FRI" />
+                    <TextView style="@style/CalDayHeader" android:text="SAT" />
+                </LinearLayout>
+
+                <!-- Calendar Month Grid Container -->
+                <TableLayout
+                    android:id="@+id/calGridTable"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:stretchColumns="0,1,2,3,4,5,6" />
+            </LinearLayout>
+
+            <!-- Right Panel: RM-OS & DAAK Node Agenda -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:layout_marginStart="24dp"
+                android:background="@drawable/setting_card_bg"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/outfit"
+                    android:fontVariationSettings="'wght' 600"
+                    android:text="📋 DAAK Node &amp; RM-OS Ajandası"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="12dp"
+                    android:fontFamily="@font/outfit"
+                    android:text="Google Calendar &amp; daakREMEMBER Görevleri"
+                    android:textColor="#38BDF8"
+                    android:textSize="12sp" />
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:id="@+id/agendaList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <!-- Item 1: Honda Accord ITV Gelves (High Priority) -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/pill_bg"
+                            android:orientation="vertical"
+                            android:padding="12dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/outfit"
+                                android:fontVariationSettings="'wght' 600"
+                                android:text="🚗 27 Ekim 08:33 • ITV Randevusu"
+                                android:textColor="#F59E0B"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:fontFamily="@font/outfit"
+                                android:text="Honda Accord (8010 LBN) • Estación ITV Gelves (VEIASA) — 9 gün sonra"
+                                android:textColor="#D4D4D8"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <!-- Item 2: Sınav Derecho Privado (Yarın) -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/pill_bg"
+                            android:orientation="vertical"
+                            android:padding="12dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/outfit"
+                                android:fontVariationSettings="'wght' 600"
+                                android:text="📚 19 Ekim 13:40 • Derecho Privado Sınavı"
+                                android:textColor="#EF4444"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:fontFamily="@font/outfit"
+                                android:text="Instituciones Básicas • Aula 44 — Yarın!"
+                                android:textColor="#D4D4D8"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <!-- Item 3: Contabilidad -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/pill_bg"
+                            android:orientation="vertical"
+                            android:padding="12dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/outfit"
+                                android:fontVariationSettings="'wght' 600"
+                                android:text="📚 20 Ekim 13:30 • Contabilidad Sınavı"
+                                android:textColor="#A855F7"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:fontFamily="@font/outfit"
+                                android:text="Fundamentos de Contabilidad • Aula 03 — 2 gün sonra"
+                                android:textColor="#D4D4D8"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <!-- Item 4: daakREMEMBER Tasks -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/pill_bg"
+                            android:orientation="vertical"
+                            android:padding="12dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/outfit"
+                                android:fontVariationSettings="'wght' 600"
+                                android:text="⚡ daakREMEMBER Görevleri"
+                                android:textColor="#38BDF8"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:fontFamily="@font/outfit"
+                                android:text="• Redmono Fuar Katalogları (DR.BIO, Düzgünler)\n• DAAK Node Hub Senkronizasyonu &amp; Bakım"
+                                android:textColor="#D4D4D8"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </ScrollView>
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 </FrameLayout>

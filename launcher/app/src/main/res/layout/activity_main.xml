@@ -133,6 +133,31 @@
                         android:letterSpacing="0.14"
                         android:textAllCaps="true" />
                 </LinearLayout>
+
+                <!-- Upcoming Event Pill (RM-OS Calendar & DAAK Node / ITV / Exams) -->
+                <LinearLayout
+                    android:id="@+id/upcomingPill"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginStart="4dp"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="16dp"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/pill_bg"
+                    android:focusable="true"
+                    android:clickable="true">
+
+                    <TextView
+                        android:id="@+id/upcomingText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🚗 27 Ekim • Honda Accord ITV Gelves Randevusu (9 gün)"
+                        android:textColor="#EEFFFFFF"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/outfit"
+                        android:fontVariationSettings="'wght' 500" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -207,4 +232,13 @@
 
     <!-- Settings Fullscreen Overlay -->
     <include layout="@layout/overlay_settings" />
+
+    <!-- Fullscreen 1% Brightness / Deep Black Idle Dim Overlay -->
+    <View
+        android:id="@+id/dimOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FF000000"
+        android:alpha="0"
+        android:visibility="gone" />
 </FrameLayout>
