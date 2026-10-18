@@ -435,14 +435,14 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     }
     private static final Map<Integer, CalEvent> OCT_EVENTS = new HashMap<>();
     static {
-        OCT_EVENTS.put(19, new CalEvent("Derecho", "LUNES, 19 OCT — Derecho Privado Sınavı (Aula 44, 13:40)", 0xFFF43F5E));
-        OCT_EVENTS.put(20, new CalEvent("Contabilidad", "MARTES, 20 OCT — Contabilidad Sınavı (Aula 03, 13:30)", 0xFFA855F7));
-        OCT_EVENTS.put(22, new CalEvent("Estadística", "JUEVES, 22 OCT — Estadística Sınavı (Aula 27, 13:35)", 0xFF38BDF8));
-        OCT_EVENTS.put(23, new CalEvent("Finanzas", "VIERNES, 23 OCT — Finanzas I Sınavı (Aula 26, 13:40)", 0xFF10B981));
+        OCT_EVENTS.put(19, new CalEvent("Derecho", "LUNES, 19 OCT — Examen Derecho Privado (Aula 44, 13:40)", 0xFFF43F5E));
+        OCT_EVENTS.put(20, new CalEvent("Contabilidad", "MARTES, 20 OCT — Examen Contabilidad (Aula 03, 13:30)", 0xFFA855F7));
+        OCT_EVENTS.put(22, new CalEvent("Estadística", "JUEVES, 22 OCT — Examen Estadística (Aula 27, 13:35)", 0xFF38BDF8));
+        OCT_EVENTS.put(23, new CalEvent("Finanzas", "VIERNES, 23 OCT — Examen Finanzas I (Aula 26, 13:40)", 0xFF10B981));
         OCT_EVENTS.put(26, new CalEvent("Stocks&PERT", "LUNES, 26 OCT — IEE Práctica 3: Stocks & PERT (13:30)", 0xFFF59E0B));
-        OCT_EVENTS.put(27, new CalEvent("ITV Gelves", "MARTES, 27 OCT — 🚗 Honda Accord ITV Randevusu (Gelves, 08:33)", 0xFF38BDF8));
-        OCT_EVENTS.put(29, new CalEvent("Microeconomía", "JUEVES, 29 OCT — Microeconomía Sınavı (Aula 31, 13:40)", 0xFFEF4444));
-        OCT_EVENTS.put(30, new CalEvent("Intro Economía", "VIERNES, 30 OCT — Intro Economía Sınavı (13:40)", 0xFFEAB308));
+        OCT_EVENTS.put(27, new CalEvent("ITV Gelves", "MARTES, 27 OCT — 🚗 Cita ITV Honda Accord (Gelves, 08:33)", 0xFF38BDF8));
+        OCT_EVENTS.put(29, new CalEvent("Microeconomía", "JUEVES, 29 OCT — Examen Microeconomía (Aula 31, 13:40)", 0xFFEF4444));
+        OCT_EVENTS.put(30, new CalEvent("Intro Economía", "VIERNES, 30 OCT — Examen Intro a la Economía (13:40)", 0xFFEAB308));
     }
 
     private void showCalendar() {
@@ -505,9 +505,9 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         cal.set(Calendar.MONTH, calMonth);
         cal.set(Calendar.DAY_OF_MONTH, 1);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("MMMM yyyy", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("MMMM yyyy", new Locale("es", "ES"));
         tvCalMonthYear.setText(sdf.format(cal.getTime()));
-        tvCalSubtitle.setText(todayDay + " " + new SimpleDateFormat("MMMM", Locale.getDefault()).format(cal.getTime()).toUpperCase(Locale.getDefault()) + " — Planlanan Etkinlik Yok");
+        tvCalSubtitle.setText(todayDay + " DE " + new SimpleDateFormat("MMMM", new Locale("es", "ES")).format(cal.getTime()).toUpperCase(new Locale("es", "ES")) + " — Sin eventos programados");
 
         calGridTable.removeAllViews();
 
@@ -577,7 +577,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
                                 tvCalSubtitle.setText(OCT_EVENTS.get(d).title);
                                 tvCalSubtitle.setTextColor(OCT_EVENTS.get(d).color);
                             } else {
-                                tvCalSubtitle.setText(d + " " + sdf.format(cal.getTime()).toUpperCase(Locale.getDefault()) + " — Planlanan etkinlik yok");
+                                tvCalSubtitle.setText(d + " DE " + sdf.format(cal.getTime()).toUpperCase(new Locale("es", "ES")) + " — Sin eventos programados");
                                 tvCalSubtitle.setTextColor(0xFF38BDF8);
                             }
                         }
@@ -769,24 +769,24 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
 
             if (connected) {
                 dot.setBackgroundColor(0xFF34D399);
-                tvStatus.setText("Köprü: 192.168.236.62 • Bağlı");
+                tvStatus.setText("Puente: 192.168.236.62 • Conectado");
                 tvStatus.setTextColor(0xFFA7F3D0);
 
                 if (l1 != null) {
                     hueLight1State = l1;
                     int pct = Math.round((l1.bri / 254f) * 100);
-                    btnL1.setText("Şömine Sol (8): " + (l1.on ? "AÇIK (%" + pct + ")" : "KAPALI"));
+                    btnL1.setText("Chimenea Izq (8): " + (l1.on ? "ENCENDIDA (%" + pct + ")" : "APAGADA"));
                     btnL1.setTextColor(l1.on ? 0xFF34D399 : 0x99FFFFFF);
                 }
                 if (l2 != null) {
                     hueLight2State = l2;
                     int pct = Math.round((l2.bri / 254f) * 100);
-                    btnL2.setText("Şömine Sağ (10): " + (l2.on ? "AÇIK (%" + pct + ")" : "KAPALI"));
+                    btnL2.setText("Chimenea Dcha (10): " + (l2.on ? "ENCENDIDA (%" + pct + ")" : "APAGADA"));
                     btnL2.setTextColor(l2.on ? 0xFF34D399 : 0x99FFFFFF);
                 }
             } else {
                 dot.setBackgroundColor(0xFFEF4444);
-                tvStatus.setText("Köprü: 192.168.236.62 • Bağlantı Bekleniyor");
+                tvStatus.setText("Puente: 192.168.236.62 • Desconectado");
                 tvStatus.setTextColor(0xFFFCA5A5);
             }
         });
@@ -797,14 +797,14 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         devicesContainer.removeAllViews();
 
         String[][] devList = new String[][]{
-                {"DAAK Node Hub (vaytniga / S9+)", "Ağ Omurgası & Hue Gateway • Tailscale", "100.72.106.12 • 192.168.34.12", "Aktif (Online • Hub)", "#34D399"},
-                {"Philips Hue Bridge (Şömine)", "Zigbee Akıllı Ev Aydınlatma • 2 Lambalı", "192.168.236.62 (eth0 tether)", "Aktif (Online • 2 Işık)", "#34D399"},
-                {"MYA-L11 (Kırık Mac)", "24/7 Sunucu • Docker Engine • FastDrop • Hermes", "100.106.212.28 • 192.168.34.46", "Aktif (Online)", "#34D399"},
-                {"MacBook Pro M3 (kai)", "Ana Çalışma & Geliştirme Cihazı • Antigravity", "100.102.108.7 • 192.168.34.194", "Aktif (Online)", "#34D399"},
-                {"LOLILE (PC Master)", "Windows 11 Pro • Workstation • RM-OS Vault & Stremio Server", "100.69.25.110 • 192.168.1.57", "Aktif (Online • Stremio 11470)", "#34D399"},
-                {"DAAK-DNS (Linux Core)", "DNS Çözücü & Cloudflare Connector", "100.114.210.93", "Aktif (Online)", "#34D399"},
-                {"TCL 4K Smart TV Pro (Nigtutio)", "Salon 4K Ekranı • Android 11 (Bu Cihaz)", "100.66.111.125 • 192.168.34.182", "Aktif (Online)", "#38BDF8"},
-                {"Keenetic Hopper (Vaytniga Wi-Fi)", "5GHz Wi-Fi Router • LAN Ağ Omurgası", "192.168.34.1", "Aktif (Online)", "#34D399"}
+                {"DAAK Node Hub (vaytniga / S9+)", "Núcleo de Red y Pasarela Hue • Tailscale", "100.72.106.12 • 192.168.34.12", "Activo (Online • Hub)", "#34D399"},
+                {"Philips Hue Bridge (Chimenea)", "Iluminación Inteligente Zigbee • 2 Lámparas", "192.168.236.62 (eth0 tether)", "Activo (Online • 2 Luces)", "#34D399"},
+                {"MYA-L11 (Mac Roto)", "Servidor 24/7 • Docker Engine • FastDrop • Hermes", "100.106.212.28 • 192.168.34.46", "Activo (Online)", "#34D399"},
+                {"MacBook Pro M3 (kai)", "Dispositivo Principal de Desarrollo • Antigravity", "100.102.108.7 • 192.168.34.194", "Activo (Online)", "#34D399"},
+                {"LOLILE (PC Master)", "Windows 11 Pro • Workstation • RM-OS y Servidor Stremio", "100.69.25.110 • 192.168.1.57", "Activo (Online • Stremio 11470)", "#34D399"},
+                {"DAAK-DNS (Linux Core)", "Resolución DNS y Conector Cloudflare", "100.114.210.93", "Activo (Online)", "#34D399"},
+                {"TCL 4K Smart TV Pro (Nigtutio)", "Pantalla 4K Salón • Android 11 (Este Dispositivo)", "100.66.111.125 • 192.168.34.182", "Activo (Online)", "#38BDF8"},
+                {"Keenetic Hopper (Vaytniga Wi-Fi)", "Router Wi-Fi 5GHz • Red Local LAN", "192.168.34.1", "Activo (Online)", "#34D399"}
         };
 
         for (String[] d : devList) {
@@ -1121,9 +1121,9 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
                 CalEvent ev = OCT_EVENTS.get(nextDay);
                 int daysLeft = nextDay - today;
                 String prefix;
-                if (daysLeft == 0) prefix = "🔴 Bugün • ";
-                else if (daysLeft == 1) prefix = "⚡ Yarın (" + nextDay + " Eki) • ";
-                else prefix = "📅 " + nextDay + " Ekim (" + daysLeft + " gün) • ";
+                if (daysLeft == 0) prefix = "🔴 Hoy • ";
+                else if (daysLeft == 1) prefix = "⚡ Mañana (" + nextDay + " Oct) • ";
+                else prefix = "📅 " + nextDay + " Octubre (" + daysLeft + " días) • ";
 
                 String shortTitle = ev.title;
                 int dashIdx = shortTitle.indexOf("— ");
@@ -1131,14 +1131,14 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
 
                 if (nextDay < 27) {
                     int itvDays = 27 - today;
-                    upcomingText.setText(prefix + shortTitle + "  |  🚗 27 Ekim ITV (" + itvDays + " gün)");
+                    upcomingText.setText(prefix + shortTitle + "  |  🚗 27 Oct ITV (" + itvDays + " días)");
                 } else {
                     upcomingText.setText(prefix + shortTitle);
                 }
                 return;
             }
         }
-        upcomingText.setText("🚗 27 Ekim • Honda Accord ITV Gelves Randevusu");
+        upcomingText.setText("🚗 27 Octubre • Cita Previa ITV Honda Accord");
     }
 
     private void open(Intent i) {
@@ -1272,8 +1272,8 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
             }
         }
 
-        if (btnCalendar != null) btnCalendar.setText(showText ? "Calendar" : "");
-        if (btnDevices != null) btnDevices.setText(showText ? "Devices" : "");
+        if (btnCalendar != null) btnCalendar.setText(showText ? "Calendario" : "");
+        if (btnDevices != null) btnDevices.setText(showText ? "Dispositivos" : "");
         if (btnSettings != null) btnSettings.setText(showText ? getString(R.string.settings) : "");
         updateWifiLabel();
     }
@@ -1376,16 +1376,16 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
                 int code = conn.getResponseCode();
                 if (code == 200) {
                     if (userInitiated) {
-                        runOnUiThread(() -> Toast.makeText(this, "✅ v1.2.0 • Sistem güncel! (Otomatik Güncelleme Aktif)", Toast.LENGTH_LONG).show());
+                        runOnUiThread(() -> Toast.makeText(this, "✅ v1.2.0 • El sistema está actualizado", Toast.LENGTH_LONG).show());
                     }
                 } else {
                     if (userInitiated) {
-                        runOnUiThread(() -> Toast.makeText(this, "Güncelleme servisi kontrol edildi • v1.2.0 Son Sürüm", Toast.LENGTH_SHORT).show());
+                        runOnUiThread(() -> Toast.makeText(this, "Comprobación finalizada • v1.2.0 versión actual", Toast.LENGTH_SHORT).show());
                     }
                 }
             } catch (Exception e) {
                 if (userInitiated) {
-                    runOnUiThread(() -> Toast.makeText(this, "Güncelleme kontrolü tamamlandı • v1.2.0 kurulu", Toast.LENGTH_SHORT).show());
+                    runOnUiThread(() -> Toast.makeText(this, "Comprobación finalizada • v1.2.0 versión actual", Toast.LENGTH_SHORT).show());
                 }
             }
         }).start();

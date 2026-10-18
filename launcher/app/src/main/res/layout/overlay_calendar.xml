@@ -73,7 +73,7 @@
                     android:fontFamily="@font/outfit"
                     android:fontVariationSettings="'wght' 400"
                     android:letterSpacing="0.08"
-                    android:text="DOMINGO, 18 OCTUBRE — Bugün planlanan etkinlik yok"
+                    android:text="DOMINGO, 18 OCTUBRE — Sin eventos programados para hoy"
                     android:textAllCaps="true"
                     android:textColor="#38BDF8"
                     android:textSize="13sp" />
@@ -104,7 +104,7 @@
                 <TextView
                     android:id="@+id/btnCalToday"
                     style="@style/TopButton"
-                    android:text="Today"
+                    android:text="Hoy"
                     android:nextFocusLeft="@id/btnCalPrev"
                     android:nextFocusRight="@id/btnCalNext"
                     android:nextFocusUp="@id/btnCalToday"
@@ -147,13 +147,13 @@
                     android:layout_height="28dp"
                     android:orientation="horizontal">
 
-                    <TextView style="@style/CalDayHeader" android:text="SUN" />
-                    <TextView style="@style/CalDayHeader" android:text="MON" />
-                    <TextView style="@style/CalDayHeader" android:text="TUE" />
-                    <TextView style="@style/CalDayHeader" android:text="WED" />
-                    <TextView style="@style/CalDayHeader" android:text="THU" />
-                    <TextView style="@style/CalDayHeader" android:text="FRI" />
-                    <TextView style="@style/CalDayHeader" android:text="SAT" />
+                    <TextView style="@style/CalDayHeader" android:text="DOM" />
+                    <TextView style="@style/CalDayHeader" android:text="LUN" />
+                    <TextView style="@style/CalDayHeader" android:text="MAR" />
+                    <TextView style="@style/CalDayHeader" android:text="MIÉ" />
+                    <TextView style="@style/CalDayHeader" android:text="JUE" />
+                    <TextView style="@style/CalDayHeader" android:text="VIE" />
+                    <TextView style="@style/CalDayHeader" android:text="SÁB" />
                 </LinearLayout>
 
                 <!-- Calendar Month Grid Container -->
@@ -180,7 +180,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/outfit"
                     android:fontVariationSettings="'wght' 600"
-                    android:text="📋 DAAK Node &amp; RM-OS Ajandası"
+                    android:text="📋 Agenda RM-OS y DAAK Node"
                     android:textColor="#FFFFFFFF"
                     android:textSize="17sp" />
 
@@ -190,7 +190,7 @@
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="12dp"
                     android:fontFamily="@font/outfit"
-                    android:text="Google Calendar &amp; daakREMEMBER Görevleri"
+                    android:text="Google Calendar y Tareas daakREMEMBER"
                     android:textColor="#38BDF8"
                     android:textSize="12sp" />
 
@@ -220,7 +220,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/outfit"
                                 android:fontVariationSettings="'wght' 600"
-                                android:text="🚗 27 Ekim 08:33 • ITV Randevusu"
+                                android:text="🚗 27 Octubre 08:33 • Cita Previa ITV"
                                 android:textColor="#F59E0B"
                                 android:textSize="14sp" />
 
@@ -229,7 +229,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="2dp"
                                 android:fontFamily="@font/outfit"
-                                android:text="Honda Accord (8010 LBN) • Estación ITV Gelves (VEIASA) — 9 gün sonra"
+                                android:text="Honda Accord (8010 LBN) • Estación ITV Gelves (VEIASA) — en 9 días"
                                 android:textColor="#D4D4D8"
                                 android:textSize="12sp" />
                         </LinearLayout>
@@ -248,7 +248,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/outfit"
                                 android:fontVariationSettings="'wght' 600"
-                                android:text="📚 19 Ekim 13:40 • Derecho Privado Sınavı"
+                                android:text="📚 19 Octubre 13:40 • Examen Derecho Privado"
                                 android:textColor="#EF4444"
                                 android:textSize="14sp" />
 
@@ -257,7 +257,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="2dp"
                                 android:fontFamily="@font/outfit"
-                                android:text="Instituciones Básicas • Aula 44 — Yarın!"
+                                android:text="Instituciones Básicas • Aula 44 — ¡Mañana!"
                                 android:textColor="#D4D4D8"
                                 android:textSize="12sp" />
                         </LinearLayout>
@@ -276,7 +276,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/outfit"
                                 android:fontVariationSettings="'wght' 600"
-                                android:text="📚 20 Ekim 13:30 • Contabilidad Sınavı"
+                                android:text="📚 20 Octubre 13:30 • Examen Contabilidad"
                                 android:textColor="#A855F7"
                                 android:textSize="14sp" />
 
@@ -285,7 +285,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="2dp"
                                 android:fontFamily="@font/outfit"
-                                android:text="Fundamentos de Contabilidad • Aula 03 — 2 gün sonra"
+                                android:text="Fundamentos de Contabilidad • Aula 03 — en 2 días"
                                 android:textColor="#D4D4D8"
                                 android:textSize="12sp" />
                         </LinearLayout>
@@ -303,7 +303,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/outfit"
                                 android:fontVariationSettings="'wght' 600"
-                                android:text="⚡ daakREMEMBER Görevleri"
+                                android:text="⚡ Tareas daakREMEMBER"
                                 android:textColor="#38BDF8"
                                 android:textSize="14sp" />
 
@@ -312,7 +312,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="2dp"
                                 android:fontFamily="@font/outfit"
-                                android:text="• Redmono Fuar Katalogları (DR.BIO, Düzgünler)\n• DAAK Node Hub Senkronizasyonu &amp; Bakım"
+                                android:text="• Redmono Catálogos de Feria (DR.BIO, Düzgünler)\n• Sincronización y Mantenimiento DAAK Node Hub"
                                 android:textColor="#D4D4D8"
                                 android:textSize="12sp" />
                         </LinearLayout>

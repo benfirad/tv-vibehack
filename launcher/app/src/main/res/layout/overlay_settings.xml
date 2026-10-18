@@ -58,7 +58,7 @@
                         android:fontFamily="@font/outfit"
                         android:fontVariationSettings="'wght' 600"
                         android:letterSpacing="-0.02"
-                        android:text="Ayarlar &amp; Özelleştirme"
+                        android:text="Ajustes y Personalización"
                         android:textColor="#FFFFFFFF"
                         android:textSize="26sp" />
 
@@ -85,7 +85,7 @@
                     android:layout_marginTop="2dp"
                     android:fontFamily="@font/outfit"
                     android:fontVariationSettings="'wght' 300"
-                    android:text="Arayüz görünümü, dock derinliği, duvar kağıdı ve sistem tercihleri"
+                    android:text="Apariencia, profundidad del dock, fondo de pantalla y sistema"
                     android:textColor="#80FFFFFF"
                     android:textSize="13sp" />
             </LinearLayout>
@@ -120,7 +120,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/outfit"
                         android:fontVariationSettings="'wght' 600"
-                        android:text="Üst Bar Görünümü"
+                        android:text="Estilo de Barra Superior"
                         android:textColor="#FFFFFFFF"
                         android:textSize="17sp" />
 
@@ -130,7 +130,7 @@
                         android:layout_marginTop="2dp"
                         android:layout_marginBottom="14dp"
                         android:fontFamily="@font/outfit"
-                        android:text="Calendar, Devices ve diğer butonların görünümü"
+                        android:text="Visualización de iconos y texto de la barra superior"
                         android:textColor="#80FFFFFF"
                         android:textSize="13sp" />
 
@@ -151,7 +151,7 @@
                             android:gravity="center"
                             android:fontFamily="@font/outfit"
                             android:fontVariationSettings="'wght' 500"
-                            android:text="🏷️ Yazı + Logo"
+                            android:text="🏷️ Texto e Icono"
                             android:textColor="@drawable/setting_option_text"
                             android:textSize="14sp"
                             android:nextFocusDown="@+id/btnPeekUltra" />
@@ -168,7 +168,7 @@
                             android:gravity="center"
                             android:fontFamily="@font/outfit"
                             android:fontVariationSettings="'wght' 500"
-                            android:text="🔘 Sadece Logo"
+                            android:text="🔘 Solo Icono"
                             android:textColor="@drawable/setting_option_text"
                             android:textSize="14sp"
                             android:nextFocusDown="@+id/btnPeekUltra" />
@@ -188,7 +188,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/outfit"
                         android:fontVariationSettings="'wght' 600"
-                        android:text="Dock Gizlenme Seviyesi (Peek)"
+                        android:text="Profundidad del Dock (Ocultación)"
                         android:textColor="#FFFFFFFF"
                         android:textSize="17sp" />
 
@@ -198,7 +198,7 @@
                         android:layout_marginTop="2dp"
                         android:layout_marginBottom="14dp"
                         android:fontFamily="@font/outfit"
-                        android:text="Dock seçili değilken aşağı inme derinliği"
+                        android:text="Posición del dock cuando no está seleccionado"
                         android:textColor="#80FFFFFF"
                         android:textSize="13sp" />
 
@@ -219,7 +219,7 @@
                             android:gravity="center"
                             android:fontFamily="@font/outfit"
                             android:fontVariationSettings="'wght' 500"
-                            android:text="🔻 Ultra Düşük (%95)"
+                            android:text="🔻 Ultra Bajo (%95)"
                             android:textColor="@drawable/setting_option_text"
                             android:textSize="13sp"
                             android:nextFocusUp="@+id/btnTopStyleText" />
@@ -237,7 +237,7 @@
                             android:gravity="center"
                             android:fontFamily="@font/outfit"
                             android:fontVariationSettings="'wght' 500"
-                            android:text="↔️ Dengeli (Yarım)"
+                            android:text="↔️ Equilibrado (Mitad)"
                             android:textColor="@drawable/setting_option_text"
                             android:textSize="13sp"
                             android:nextFocusUp="@+id/btnTopStyleText" />
@@ -254,7 +254,7 @@
                             android:gravity="center"
                             android:fontFamily="@font/outfit"
                             android:fontVariationSettings="'wght' 500"
-                            android:text="⬆️ Sabit Açık"
+                            android:text="⬆️ Siempre Visible"
                             android:textColor="@drawable/setting_option_text"
                             android:textSize="13sp"
                             android:nextFocusUp="@+id/btnTopStyleText" />
@@ -284,7 +284,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/outfit"
                         android:fontVariationSettings="'wght' 600"
-                        android:text="Duvar Kağıdı Teması (Gumball HD)"
+                        android:text="Fondo de Pantalla (Gumball HD)"
                         android:textColor="#FFFFFFFF"
                         android:textSize="17sp" />
 
@@ -294,7 +294,7 @@
                         android:layout_marginTop="2dp"
                         android:layout_marginBottom="14dp"
                         android:fontFamily="@font/outfit"
-                        android:text="2D çizgi dizi oturma odası gündüz ve gece döngüsü"
+                        android:text="Ciclo de día y noche del salón de Gumball"
                         android:textColor="#80FFFFFF"
                         android:textSize="13sp" />
 
@@ -315,7 +315,7 @@
                             android:gravity="center"
                             android:fontFamily="@font/outfit"
                             android:fontVariationSettings="'wght' 500"
-                            android:text="🌗 Otomatik"
+                            android:text="🌓 Automático"
                             android:textColor="@drawable/setting_option_text"
                             android:textSize="13sp"
                             android:nextFocusDown="@+id/btnSysSettings" />
@@ -333,7 +333,7 @@
                             android:gravity="center"
                             android:fontFamily="@font/outfit"
                             android:fontVariationSettings="'wght' 500"
-                            android:text="☀️ Gündüz"
+                            android:text="☀️ Día"
                             android:textColor="@drawable/setting_option_text"
                             android:textSize="13sp"
                             android:nextFocusDown="@+id/btnSysSettings" />
@@ -350,7 +350,7 @@
                             android:gravity="center"
                             android:fontFamily="@font/outfit"
                             android:fontVariationSettings="'wght' 500"
-                            android:text="🌙 Gece"
+                            android:text="🌙 Noche"
                             android:textColor="@drawable/setting_option_text"
                             android:textSize="13sp"
                             android:nextFocusDown="@+id/btnSysSettings" />
@@ -370,7 +370,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/outfit"
                         android:fontVariationSettings="'wght' 600"
-                        android:text="Android TV Sistem Kısayolları"
+                        android:text="Accesos Rápidos del Sistema"
                         android:textColor="#FFFFFFFF"
                         android:textSize="17sp" />
 
@@ -380,7 +380,7 @@
                         android:layout_marginTop="2dp"
                         android:layout_marginBottom="14dp"
                         android:fontFamily="@font/outfit"
-                        android:text="Cihaz, ağ ve uygulama yönetimi"
+                        android:text="Gestión de dispositivo, red y aplicaciones"
                         android:textColor="#80FFFFFF"
                         android:textSize="13sp" />
 
@@ -401,7 +401,7 @@
                             android:gravity="center"
                             android:fontFamily="@font/outfit"
                             android:fontVariationSettings="'wght' 500"
-                            android:text="⚙️ Sistem Ayarları"
+                            android:text="⚙️ Ajustes del Sistema"
                             android:textColor="@drawable/setting_option_text"
                             android:textSize="13sp"
                             android:nextFocusUp="@+id/btnWallAuto" />
@@ -419,7 +419,7 @@
                             android:gravity="center"
                             android:fontFamily="@font/outfit"
                             android:fontVariationSettings="'wght' 500"
-                            android:text="📶 Wi-Fi Ayarları"
+                            android:text="📶 Red y Wi-Fi"
                             android:textColor="@drawable/setting_option_text"
                             android:textSize="13sp"
                             android:nextFocusUp="@+id/btnWallAuto" />
@@ -436,7 +436,7 @@
                             android:gravity="center"
                             android:fontFamily="@font/outfit"
                             android:fontVariationSettings="'wght' 500"
-                            android:text="📱 Uygulamalar"
+                            android:text="📱 Aplicaciones"
                             android:textColor="@drawable/setting_option_text"
                             android:textSize="13sp"
                             android:nextFocusUp="@+id/btnWallAuto" />
@@ -453,7 +453,7 @@
                         android:gravity="center"
                         android:fontFamily="@font/outfit"
                         android:fontVariationSettings="'wght' 500"
-                        android:text="🔄 Otomatik Güncellemeleri Denetle (GitHub / DAAK)"
+                        android:text="🔄 Buscar Actualizaciones (GitHub / DAAK)"
                         android:textColor="@drawable/setting_option_text"
                         android:textSize="13sp"
                         android:nextFocusUp="@+id/btnSysSettings" />

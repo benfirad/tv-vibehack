@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Home</string>
-    <string name="inputs">Inputs</string>
+    <string name="app_name">Inicio</string>
+    <string name="inputs">Entradas</string>
     <string name="wifi">Wi-Fi</string>
-    <string name="settings">Settings</string>
-    <string name="choose_input">Inputs</string>
-    <string name="connected">Connected</string>
-    <string name="standby">Standby</string>
-    <string name="not_connected">No device</string>
-    <string name="live_tv">Live TV</string>
-    <string name="no_inputs">No inputs found</string>
-    <string name="good_morning">Good morning, Otto y Mercedes Carolina</string>
-    <string name="good_afternoon">Good afternoon, Otto y Mercedes Carolina</string>
-    <string name="good_evening">Good evening, Otto y Mercedes Carolina</string>
-    <string name="good_night">Good night, Otto y Mercedes Carolina</string>
+    <string name="settings">Ajustes</string>
+    <string name="choose_input">Entradas</string>
+    <string name="connected">Conectado</string>
+    <string name="standby">En espera</string>
+    <string name="not_connected">Sin dispositivo</string>
+    <string name="live_tv">TV en directo</string>
+    <string name="no_inputs">No se encontraron entradas</string>
+    <string name="good_morning">Buenos días, Otto y Mercedes Carolina</string>
+    <string name="good_afternoon">Buenas tardes, Otto y Mercedes Carolina</string>
+    <string name="good_evening">Buenas noches, Otto y Mercedes Carolina</string>
+    <string name="good_night">Buenas noches, Otto y Mercedes Carolina</string>
     <string name="ethernet">Ethernet</string>
-    <string name="offline">Offline</string>
+    <string name="offline">Sin conexión</string>
 </resources>
