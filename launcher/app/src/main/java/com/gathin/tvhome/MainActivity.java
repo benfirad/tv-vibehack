@@ -102,7 +102,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     private View upcomingPill;
     private TextView upcomingText;
     private boolean isScreenDimmed = false;
-    private static final long IDLE_TIMEOUT_MS = 60_000L;
+    private static final long IDLE_TIMEOUT_MS = 180_000L;
     private final Handler idleHandler = new Handler(Looper.getMainLooper());
     private final Runnable idleRunnable = this::enterIdleMode;
 
@@ -317,13 +317,13 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
 
         try {
             WindowManager.LayoutParams lp = getWindow().getAttributes();
-            lp.screenBrightness = 0.01f;
+            lp.screenBrightness = 0.03f;
             getWindow().setAttributes(lp);
         } catch (Exception ignored) {}
 
         if (dimOverlay != null) {
             dimOverlay.setVisibility(View.VISIBLE);
-            dimOverlay.animate().alpha(0.97f).setDuration(800).start();
+            dimOverlay.animate().alpha(0.88f).setDuration(800).start();
         }
     }
 
@@ -833,7 +833,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         isDockPeeking = peek;
         final float targetY = peek ? peekOffset : 0f;
         final float targetAlpha = peek ? 0f : 1f;
-        final float targetScrimAlpha = peek ? 0.15f : 0.65f;
+        final float targetScrimAlpha = peek ? 0.08f : 0.45f;
         if (peek) {
             grid.scrollToPosition(0);
         }
@@ -857,7 +857,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
 
         final float startY = grid.getTranslationY();
         final float startAlpha = dockDecoration != null ? dockDecoration.getAlpha() : 0f;
-        final float startScrim = scrim != null ? scrim.getAlpha() : 0.15f;
+        final float startScrim = scrim != null ? scrim.getAlpha() : 0.08f;
 
         dockPeekAnimator = ValueAnimator.ofFloat(0f, 1f);
         dockPeekAnimator.setDuration(peek ? 240 : 260);
