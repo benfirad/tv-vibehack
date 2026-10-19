@@ -206,63 +206,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <!-- Item 1: Honda Accord ITV Gelves (High Priority) -->
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:background="@drawable/pill_bg"
-                            android:orientation="vertical"
-                            android:padding="12dp">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/outfit"
-                                android:fontVariationSettings="'wght' 600"
-                                android:text="🚗 27 Octubre 08:33 • Cita Previa ITV"
-                                android:textColor="#F59E0B"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:fontFamily="@font/outfit"
-                                android:text="Honda Accord (8010 LBN) • Estación ITV Gelves (VEIASA) — en 9 días"
-                                android:textColor="#D4D4D8"
-                                android:textSize="12sp" />
-                        </LinearLayout>
-
-                        <!-- Item 2: Sınav Derecho Privado (Yarın) -->
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:background="@drawable/pill_bg"
-                            android:orientation="vertical"
-                            android:padding="12dp">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/outfit"
-                                android:fontVariationSettings="'wght' 600"
-                                android:text="📚 19 Octubre 13:40 • Examen Derecho Privado"
-                                android:textColor="#EF4444"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:fontFamily="@font/outfit"
-                                android:text="Instituciones Básicas • Aula 44 — ¡Mañana!"
-                                android:textColor="#D4D4D8"
-                                android:textSize="12sp" />
-                        </LinearLayout>
-
-                        <!-- Item 3: Contabilidad -->
+                        <!-- Item 1: Contabilidad (Mañana / 20 Oct) -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -285,7 +229,63 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="2dp"
                                 android:fontFamily="@font/outfit"
-                                android:text="Fundamentos de Contabilidad • Aula 03 — en 2 días"
+                                android:text="Fundamentos de Contabilidad • Aula 03 — ¡Mañana!"
+                                android:textColor="#D4D4D8"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <!-- Item 2: Estadística (22 Oct) -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/pill_bg"
+                            android:orientation="vertical"
+                            android:padding="12dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/outfit"
+                                android:fontVariationSettings="'wght' 600"
+                                android:text="📊 22 Octubre 13:35 • Examen Estadística"
+                                android:textColor="#38BDF8"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:fontFamily="@font/outfit"
+                                android:text="Estadística Grupo 1 • Aula 27 (2ª Planta) — en 3 días"
+                                android:textColor="#D4D4D8"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <!-- Item 3: Honda Accord ITV La Rinconada (27 Oct) -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/pill_bg"
+                            android:orientation="vertical"
+                            android:padding="12dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/outfit"
+                                android:fontVariationSettings="'wght' 600"
+                                android:text="🚗 27 Octubre 08:33 • Cita Previa ITV"
+                                android:textColor="#F59E0B"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:fontFamily="@font/outfit"
+                                android:text="Honda Accord (8010 LBN) • ITV La Rinconada — en 8 días"
                                 android:textColor="#D4D4D8"
                                 android:textSize="12sp" />
                         </LinearLayout>

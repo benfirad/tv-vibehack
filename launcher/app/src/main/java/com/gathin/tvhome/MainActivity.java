@@ -435,14 +435,11 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     }
     private static final Map<Integer, CalEvent> OCT_EVENTS = new HashMap<>();
     static {
-        OCT_EVENTS.put(19, new CalEvent("Derecho", "LUNES, 19 OCT — Examen Derecho Privado (Aula 44, 13:40)", 0xFFF43F5E));
-        OCT_EVENTS.put(20, new CalEvent("Contabilidad", "MARTES, 20 OCT — Examen Contabilidad (Aula 03, 13:30)", 0xFFA855F7));
+        OCT_EVENTS.put(20, new CalEvent("Contabilidad", "MARTES, 20 OCT — Examen Fundamentos de Contabilidad (Aula 03, 13:30)", 0xFFA855F7));
         OCT_EVENTS.put(22, new CalEvent("Estadística", "JUEVES, 22 OCT — Examen Estadística (Aula 27, 13:35)", 0xFF38BDF8));
-        OCT_EVENTS.put(23, new CalEvent("Finanzas", "VIERNES, 23 OCT — Examen Finanzas I (Aula 26, 13:40)", 0xFF10B981));
         OCT_EVENTS.put(26, new CalEvent("Stocks&PERT", "LUNES, 26 OCT — IEE Práctica 3: Stocks & PERT (13:30)", 0xFFF59E0B));
-        OCT_EVENTS.put(27, new CalEvent("ITV Gelves", "MARTES, 27 OCT — 🚗 Cita ITV Honda Accord (Gelves, 08:33)", 0xFF38BDF8));
-        OCT_EVENTS.put(29, new CalEvent("Microeconomía", "JUEVES, 29 OCT — Examen Microeconomía (Aula 31, 13:40)", 0xFFEF4444));
-        OCT_EVENTS.put(30, new CalEvent("Intro Economía", "VIERNES, 30 OCT — Examen Intro a la Economía (13:40)", 0xFFEAB308));
+        OCT_EVENTS.put(27, new CalEvent("ITV Rinconada", "MARTES, 27 OCT — 🚗 Cita ITV Honda Accord (La Rinconada, 08:33)", 0xFF38BDF8));
+        OCT_EVENTS.put(30, new CalEvent("Intro Economía", "VIERNES, 30 OCT — Examen Intro a la Economía (FCEYE, 09:00)", 0xFFEAB308));
     }
 
     private void showCalendar() {
