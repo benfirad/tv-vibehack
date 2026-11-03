@@ -27,6 +27,7 @@ import android.provider.Settings;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.FocusFinder;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
@@ -255,8 +256,51 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         handler.removeCallbacks(minuteTick);
     }
 
+    /** The overlay (Settings or Calendar) currently on screen, or null. */
+    private View openOverlay() {
+        if (settingsOverlay != null && settingsOverlay.getVisibility() == View.VISIBLE) return settingsOverlay;
+        if (calendarOverlay != null && calendarOverlay.getVisibility() == View.VISIBLE) return calendarOverlay;
+        return null;
+    }
+
+    private static boolean isInside(View parent, View v) {
+        for (View p = v; p != null; p = (p.getParent() instanceof View) ? (View) p.getParent() : null) {
+            if (p == parent) return true;
+        }
+        return false;
+    }
+
+    /**
+     * While an overlay is open, D-pad focus stays inside it: it can never fall through to the
+     * home screen behind. If there's nothing further in that direction, focus just stays put.
+     */
+    private boolean trapFocusInOverlay(KeyEvent event) {
+        View overlay = openOverlay();
+        if (overlay == null || event.getAction() != KeyEvent.ACTION_DOWN) return false;
+        int dir;
+        switch (event.getKeyCode()) {
+            case KeyEvent.KEYCODE_DPAD_UP: dir = View.FOCUS_UP; break;
+            case KeyEvent.KEYCODE_DPAD_DOWN: dir = View.FOCUS_DOWN; break;
+            case KeyEvent.KEYCODE_DPAD_LEFT: dir = View.FOCUS_LEFT; break;
+            case KeyEvent.KEYCODE_DPAD_RIGHT: dir = View.FOCUS_RIGHT; break;
+            default: return false;
+        }
+        View cur = getCurrentFocus();
+        if (cur == null || !isInside(overlay, cur)) {
+            overlay.requestFocus(View.FOCUS_DOWN);   // first focusable item in the overlay
+            return true;
+        }
+        View next = cur.focusSearch(dir);             // respects the layout's nextFocus* hints
+        if (next == null || !isInside(overlay, next)) {
+            next = FocusFinder.getInstance().findNextFocus((ViewGroup) overlay, cur, dir);
+        }
+        if (next != null && isInside(overlay, next)) next.requestFocus(dir);
+        return true;                                  // never let the key reach the home screen
+    }
+
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
+        if (trapFocusInOverlay(event)) return true;
         if (event.getAction() == KeyEvent.ACTION_DOWN) {
             int code = event.getKeyCode();
             if (isPurpleOrMediaKey(code)) {
@@ -926,6 +970,14 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         settingsOverlay.setAlpha(0f);
         settingsOverlay.animate().alpha(1f).setDuration(220).start();
         findViewById(R.id.btnSettingsClose).requestFocus();
+    }
+
+    /** Home pressed while the launcher is open: always show the clean home screen. */
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        if (settingsOverlay != null) settingsOverlay.setVisibility(View.GONE);
+        if (calendarOverlay != null) calendarOverlay.setVisibility(View.GONE);
     }
 
     private void hideSettings() {
