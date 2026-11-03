@@ -14,7 +14,8 @@
         <item>com.gathin.tvhome.inputs</item>
     </string-array>
 
-    <!-- Apps never shown as tiles (e.g. the Live TV app, which the Inputs menu already covers). -->
+    <!-- Apps never shown as tiles (e.g. the Live TV app, which the Inputs menu already covers).
+         Add com.gathin.tvhome.inputs to hide the Inputs tile on devices without HDMI/tuner inputs. -->
     <string-array name="hidden_apps">
         <item>com.mediatek.wwtv.tvcenter</item>
         <item>com.mitv.gallery</item>

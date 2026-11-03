@@ -114,7 +114,8 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.Holder> {
             String label = String.valueOf(ri.loadLabel(pm));
             fresh.add(new Entry(label, new ComponentName(pkg, ri.activityInfo.name), banner, icon));
         }
-        fresh.add(new Entry("Inputs", new ComponentName("com.gathin.tvhome.inputs", "InputsActivity"),
+        // TVs without HDMI/tuner inputs (e.g. streaming sticks) can hide this tile via hidden_apps.
+        if (!hidden.contains("com.gathin.tvhome.inputs")) fresh.add(new Entry("Inputs", new ComponentName("com.gathin.tvhome.inputs", "InputsActivity"),
                 ctx.getDrawable(R.drawable.banner_inputs), ctx.getDrawable(R.drawable.ic_input)));
 
         // Row 0: Dock Core Apps
@@ -141,8 +142,12 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.Holder> {
             otherApps.add(0, row0.remove(row0.size() - 1));
         }
 
-        // Row 1: Stremio Quick Stream Shelf
+        // Row 1: Stremio Quick Stream Shelf, only if Stremio is installed
+        // (otherwise it's just placeholder posters fetched from the network)
         List<Entry> stremioRow = new ArrayList<>();
+        boolean hasStremio = pm.getLeanbackLaunchIntentForPackage("com.stremio.one") != null
+                || pm.getLaunchIntentForPackage("com.stremio.one") != null;
+        if (hasStremio) {
         stremioRow.add(new Entry("Deadpool & Wolverine", null,
                 ctx.getDrawable(R.drawable.banner_stremio_deadpool), null,
                 true, "movie", "tt6263850", 0xFFDC2626));
@@ -158,6 +163,7 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.Holder> {
         stremioRow.add(new Entry("Breaking Bad", null,
                 ctx.getDrawable(R.drawable.banner_stremio_breakingbad), null,
                 true, "series", "tt0903747", 0xFF059669));
+        }
 
         for (Entry e : stremioRow) {
             if (e.stremioId != null && POSTER_CACHE.containsKey(e.stremioId)) {
@@ -171,7 +177,7 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.Holder> {
         items.addAll(otherApps);
         notifyDataSetChanged();
 
-        fetchStremioPostersAsync(stremioRow);
+        if (!stremioRow.isEmpty()) fetchStremioPostersAsync(stremioRow);
     }
 
     private void fetchStremioPostersAsync(List<Entry> entries) {
