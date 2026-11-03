@@ -1,0 +1,41 @@
+# Amazon Fire TV Stick 4K (model AFTKM, codename karat)
+# Fire OS 8.1.8.2 (RS8182/3811), based on Android 11 (API 30)
+# Everything is DISABLED, not uninstalled (pm disable-user --user 0).
+# Kept on purpose: Amazon launcher (protected), Appstore, settings, keyboard, remote/Bluetooth,
+# casting (Miracast / DIAL), OTA updates, Prime Video, YouTube.
+# Lines marked PROTECTED or RE-ENABLED are listed for reference only; disable.sh skips comments.
+# Appstore auto-updates re-enable updated apps (seen with com.amazon.bueller.music): re-run the list.
+
+# Telemetry / logging
+# PROTECTED by Fire OS, cannot disable: com.amazon.device.crashmanager
+# PROTECTED by Fire OS, cannot disable: com.amazon.device.logmanager
+# PROTECTED by Fire OS, cannot disable: com.amazon.device.metrics
+com.amazon.device.telemetry.emitter
+com.amazon.wirelessmetrics.service
+com.amazon.dp.logger
+com.amazon.logan
+
+# Ads / tracking
+com.amazon.hybridadidservice     # advertising ID
+com.amazon.tv.acr                # automatic content recognition
+# PROTECTED by Fire OS, cannot disable: com.amazon.ftvads.deeplinking    # ad click-through handler
+com.amazon.sneakpeek             # autoplay promo previews on home
+
+# Shopping / promo / preloaded apps
+com.amazon.shoptv.client
+com.amazon.shoptv.firetv.client
+com.amazon.minitv.android.app
+com.amazon.tv.earlyaccess
+com.amazon.tv.releasenotes
+com.amazon.storm.lightning.tutorial
+com.amazon.tmm.tutorial
+com.amazon.gamehub
+com.amazon.bueller.music
+com.amazon.bueller.photos
+com.amazon.tahoe                 # Amazon Kids
+
+# Alexa (voice not wanted)
+# RE-ENABLED by Fire OS at boot (disabling does not stick): com.amazon.vizzini  # Alexa voice UI
+com.amazon.tv.alexaalerts
+com.amazon.tv.alexanotifications
+com.amazon.smarthomemapviewapp

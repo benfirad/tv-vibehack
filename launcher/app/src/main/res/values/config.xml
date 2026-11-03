@@ -25,4 +25,12 @@
 
     <!-- Tiles per row in the grid; the dock always has this many slots. -->
     <integer name="columns">5</integer>
+
+    <!-- Purple/colour/media remote buttons open Stremio (only when Stremio is installed).
+         Needs the launcher's accessibility service enabled. -->
+    <bool name="remap_media_keys_to_stremio">true</bool>
+
+    <!-- Fire TV only: bring this launcher back whenever Amazon's home screen appears, since Fire OS
+         can't change the default home. Ignored on TVs without Amazon's launcher. See docs/fire-tv.md. -->
+    <bool name="firetv_home_override">true</bool>
 </resources>
