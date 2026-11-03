@@ -258,7 +258,7 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.Holder> {
                         fallback.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         ctx.startActivity(fallback);
                     } else {
-                        Toast.makeText(ctx, "Stremio yüklü değil", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ctx, ctx.getString(R.string.stremio_not_installed), Toast.LENGTH_SHORT).show();
                     }
                 }
             } else {
