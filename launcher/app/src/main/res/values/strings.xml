@@ -16,4 +16,26 @@
     <string name="good_night">Good night</string>
     <string name="ethernet">Ethernet</string>
     <string name="offline">Offline</string>
+    <string name="settings_title">Settings &amp; Customization</string>
+    <string name="settings_subtitle">Interface style, dock depth, wallpaper and system shortcuts</string>
+    <string name="settings_top_bar">Top Bar Style</string>
+    <string name="settings_top_bar_desc">How the Calendar, Wi-Fi and Settings buttons look</string>
+    <string name="settings_top_bar_text">🏷️ Text + Icon</string>
+    <string name="settings_top_bar_icon">🔘 Icon Only</string>
+    <string name="settings_peek">Dock Hiding Level (Peek)</string>
+    <string name="settings_peek_desc">How far the dock drops when not selected</string>
+    <string name="settings_peek_ultra">🔻 Ultra Low (95%)</string>
+    <string name="settings_peek_balanced">↔️ Balanced (Half)</string>
+    <string name="settings_peek_none">⬆️ Always Visible</string>
+    <string name="settings_wallpaper">Wallpaper Theme</string>
+    <string name="settings_wallpaper_desc">Cartoon living room with a day/night cycle</string>
+    <string name="settings_wallpaper_auto">🌗 Automatic</string>
+    <string name="settings_wallpaper_day">☀️ Day</string>
+    <string name="settings_wallpaper_night">🌙 Night</string>
+    <string name="settings_system">System Shortcuts</string>
+    <string name="settings_system_desc">Device, network and app management</string>
+    <string name="settings_system_settings">⚙️ System Settings</string>
+    <string name="settings_system_wifi">📶 Wi-Fi Settings</string>
+    <string name="settings_system_apps">📱 Apps</string>
+    <string name="stremio_not_installed">Stremio is not installed</string>
 </resources>

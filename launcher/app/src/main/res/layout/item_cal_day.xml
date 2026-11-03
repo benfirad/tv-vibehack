@@ -65,7 +65,7 @@
             android:fontFamily="@font/outfit"
             android:fontVariationSettings="'wght' 500"
             android:singleLine="true"
-            android:text="Sınav"
+            android:text=""
             android:textColor="#E0E7FF"
             android:textSize="11sp" />
     </LinearLayout>
