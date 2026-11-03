@@ -758,6 +758,10 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
 
     private void open(Intent i) {
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        // Fire OS opens its settings screens via Amazon's home; tell the Home override to let it through.
+        if (i.getAction() != null && i.getAction().startsWith("android.settings.")) {
+            TvAccessibilityService.letAmazonHomeThrough();
+        }
         try {
             startActivity(i);
         } catch (ActivityNotFoundException e) {

@@ -114,8 +114,9 @@ tools/restore.sh examples/xiaomi-mi-tv-4a/debloat.txt        # undo it, restore 
 ## Supported TVs
 
 Anything running Android TV or Google TV: Xiaomi/Redmi, TCL, Hisense, Sony, OnePlus, Realme,
-Nvidia Shield and most others. Not Samsung Tizen, LG webOS or Amazon Fire TV (different OS, no ADB
-launcher replacement). Tested so far on the models in [`examples/`](examples/).
+Nvidia Shield and most others. Amazon Fire TV works with a workaround for the locked home screen,
+see [`docs/fire-tv.md`](docs/fire-tv.md). Not Samsung Tizen or LG webOS. Tested so far on the models in
+[`examples/`](examples/).
 
 ## Contributing
 
